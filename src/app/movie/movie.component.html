@@ -1,0 +1,11 @@
+<div class="col-md-3 col-sm-6 col-xs-12">
+  <div class="col-sm-12">
+    <div class="thumbnail">
+      <img *ngIf="movie.poster_path" src="http://image.tmdb.org/t/p/w185/{{ movie.poster_path }}" alt="{{ movie.original_title }}">
+      <div class="caption">
+        <h4><a routerLink="/movie/{{movie.id}}" href="#">{{ movie.original_title }}</a></h4>
+        <p title="{{ movie.overview }}">{{ movie.overview | truncate : 120}}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="container">
+  <form>
+    <div class="form-group">
+      <input class="form-control input-lg" type="text" (keyup)="handleKeyUp($event)">
+    </div>
+  </form>
+</div>
+
+
+<div *ngIf="result && result.results.length" class="container">
+    <div *ngFor="let i of getRows(result.results, 4)" class="row">
+        <app-movie [movie]="resultItem" *ngFor="let resultItem of result.results | slice:(i * 4):(i + 1) * 4">
+        </app-movie>
+    </div>
+    <div class="row">
+      <div class="col-md-4 text-center">
+        <ng-container *ngIf="result.page == 1">
+          <b>Previous page</b>
+        </ng-container>
+        <ng-container *ngIf="result.page > 1">
+          <button class="btn btn-link" (click)="goToPage(result.page - 1)">Previous page</button>
+        </ng-container>
+      </div>
+      <div class="col-md-4 text-center">
+        Page <b>{{ result.page }}</b> of <b>{{ result.total_pages }}</b>
+      </div>
+      <div class="col-md-4 text-center">
+        <ng-container *ngIf="(result.total_pages - result.page) == 0">
+          <b>Next page</b>
+        </ng-container>
+        <ng-container *ngIf="(result.total_pages - result.page) > 0">
+          <button class="btn btn-link" (click)="goToPage(result.page + 1)">Next page</button>
+        </ng-container>
+      </div>
+    </div>
+</div>
